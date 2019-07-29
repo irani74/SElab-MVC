@@ -2,11 +2,14 @@ package selab.mvc.models.entities;
 
 import selab.mvc.models.Model;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Student implements Model {
     private String name;
     private String studentNo;
+
+    private ArrayList<Course> Courses = null;
 
     @Override
     public String getPrimaryKey() {
@@ -29,9 +32,32 @@ public class Student implements Model {
         return 0;
     }
 
+    public void addCourse(Course course) {
+        // TODO: 29/07/2019
+        //if (!validateStudent(student))
+        //    throw new IllegalArgumentException("Invalid time format");
+
+//        if (this.startTime != null && compareTime(value, this.startTime) != 1)
+//            throw new IllegalArgumentException("The end time cannot be earlier than the start time.");
+
+        this.Courses.add(course);
+    }
+
+
     public String getCourses() {
         // TODO: Return a comma separated list of course names
-        return "-";
+        // doTODO: Return a comma separated list of student names
+        StringBuilder name = null;
+        String cumolatedNames = "";
+        if (!this.Courses.isEmpty()){
+            for (int i = 0; i<(this.Courses.size()-1) ; i++) {
+                name.append(" , ").append(this.Courses.get(i).getTitle());
+            }
+            cumolatedNames = name.toString();
+
+        }
+
+        return cumolatedNames;
     }
 
     /**

@@ -1,8 +1,12 @@
 package selab.mvc.models.entities;
 
+import com.sun.tools.javac.util.ArrayUtils;
 import selab.mvc.models.Model;
-import sun.misc.Regexp;
+//import sun.misc.Regexp;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.regex.Pattern;
 
 public class Course implements Model {
@@ -11,6 +15,12 @@ public class Course implements Model {
     private String startTime = null;
     private String endTime = null;
     private Weekday weekday;
+
+    private ArrayList<Student> Students = null;
+
+    //new ArrayList<Student>(Arrays.asList(obj));
+
+    //ArrayList<Object> newObj = new ArrayList<Object>(Arrays.asList(obj));
 
 
     @Override
@@ -60,14 +70,39 @@ public class Course implements Model {
         return this.weekday.name();
     }
 
+
+
     public float getAverage() {
         // TODO: Calculate and return the average of the points
+
         return 0;
     }
 
+
+    public void addStudent(Student student) {
+        // TODO: 29/07/2019
+        //if (!validateStudent(student))
+        //    throw new IllegalArgumentException("Invalid time format");
+
+//        if (this.startTime != null && compareTime(value, this.startTime) != 1)
+//            throw new IllegalArgumentException("The end time cannot be earlier than the start time.");
+
+        this.Students.add(student);
+    }
+
     public String getStudents() {
-        // TODO: Return a comma separated list of student names
-        return "-";
+        // doTODO: Return a comma separated list of student names
+        StringBuilder name = null;
+        String cumolatedNames = "";
+        if (!this.Students.isEmpty()){
+            for (int i = 0; i<(this.Students.size()-1) ; i++) {
+                name.append(" , ").append(this.Students.get(i).getName());
+            }
+            cumolatedNames = name.toString();
+
+        }
+
+        return cumolatedNames;
     }
 
     /**
